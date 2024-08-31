@@ -101,7 +101,7 @@ export default {
                         const warpConfig = await getWarpConfigs(env, client);
                         return new Response(`${JSON.stringify(warpConfig, null, 4)}`, { status: 200 });
 
-                    case '/panel':
+                    case '/dashboard':
 
                         if (typeof env.bpb !== 'object') {
                             const errorPage = renderErrorPage('KV Dataset is not properly set!', null, true);
@@ -147,7 +147,7 @@ export default {
                         }
 
                         const loginAuth = await Authenticate(request, env);
-                        if (loginAuth) return Response.redirect(`${url.origin}/panel`, 302);
+                        if (loginAuth) return Response.redirect(`${url.origin}/dashboard`, 302);
 
                         let secretKey = await env.bpb.get('secretKey');
                         if (!secretKey) {
@@ -200,7 +200,7 @@ export default {
                             }
                         });        
 
-                    case '/panel/password':
+                    case '/dashboard/password':
 
                         const oldPwd = await env.bpb.get('pwd');
                         let passAuth = await Authenticate(request, env);
@@ -844,15 +844,15 @@ const generateRemark = (index, port) => {
     switch (index) {
         case 0:
         case 1:
-            remark = `💦 BPB - Domain_${index + 1} : ${port}`;
+            remark = `🍑🍐Rmod BPB - Domain_${index + 1} : ${port}`;
             break;
         case 2:
         case 3:
-            remark = `💦 BPB - IPv4_${index - 1} : ${port}`;
+            remark = `🍑🍐Rmod - IPv4_${index - 1} : ${port}`;
             break;
         case 4:
         case 5:
-            remark = `💦 BPB - IPv6_${index - 3} : ${port}`;
+            remark = `🍑🍐Rmod - IPv6_${index - 3} : ${port}`;
             break;
         default:
             remark = `💦 BPB - Clean IP_${index - 5} : ${port}`;
@@ -2157,7 +2157,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 	</head>
 	
 	<body>
-		<h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+		<h1>Rmod <span style="font-size: smaller;">${panelVersion}</span> 🍑🍐</h1>
 		<div class="form-container">
             <h2>FRAGMENT SETTINGS ⚙️</h2>
 			<form id="configForm">
@@ -2887,7 +2887,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                 const applyButtonVal = applyButton.value;
                 applyButton.value = '⌛ Loading...';
 
-                const response = await fetch('/panel', {
+                const response = await fetch('/dashboard', {
                     method: 'POST',
                     body: formData,
                     credentials: 'include'
@@ -2953,7 +2953,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             }
                     
             try {
-                const response = await fetch('/panel/password', {
+                const response = await fetch('/dashboard/password', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'text/plain'
@@ -3061,7 +3061,7 @@ const renderLoginPage = async () => {
     </head>
     <body>
         <div class="container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+            <h1>Rmod <span style="font-size: smaller;">${panelVersion}</span> 🍑🍐</h1>
             <div class="form-container">
                 <h2>User Login</h2>
                 <form id="loginForm">
@@ -3089,7 +3089,7 @@ const renderLoginPage = async () => {
                 });
             
                 if (response.ok) {
-                    window.location.href = '/panel';
+                    window.location.href = '/dashboard';
                 } else {
                     passwordError.textContent = '⚠️ Wrong Password!';
                     const errorMessage = await response.text();
@@ -3132,7 +3132,7 @@ const renderErrorPage = (message, error, refer) => {
 
     <body>
         <div id="error-container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+            <h1>Rmod <span style="font-size: smaller;">${panelVersion}</span> 🍑🍐</h1>
             <div id="error-message">
                 <h2>${message} ${refer 
                     ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' 
